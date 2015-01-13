@@ -1,0 +1,47 @@
+.splitpic .splitpic-images {
+        position: relative;
+        overflow: hidden;
+}
+
+.splitpic-image {
+    overflow: hidden;
+    margin-top: 0px;
+}
+
+.splitpic-left-image {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+.splitpic-right-image {
+}
+.splitpic-info {
+    top: 45%;
+    width: 100%;
+    font-size: 200%;
+    color: white;
+    position: absolute;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.50);
+}
+.splitpic-bar {
+    position: absolute;
+    background-color: #113;
+}
+.splitpic-horizontal {
+    cursor: ew-resize;
+}
+.splitpic-horizontal .splitpic-bar {
+    top: 0;
+    width: 5px;
+    height: 100%;
+}
+.splitpic-vertical {
+    cursor: ns-resize;
+}
+.splitpic-vertical .splitpic-bar {
+    left: 0;
+    width: 100%;
+    height: 5px;
+}
