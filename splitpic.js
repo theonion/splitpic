@@ -12,7 +12,7 @@ function SplitPic(element) {
         } else {
             relativeX = x;
         }
-        leftPane.style.clip = 'rect(0px, ' + relativeX + 'px, auto, 0px)';
+        leftPane.style.clipPath = 'rect(0px, ' + relativeX + 'px, auto, 0px)';
         bar.style.left = relativeX + 'px';
     };
     // how much of the left image should we show at start? 50% if not specified
@@ -83,7 +83,7 @@ function SplitPicVertical(element) {
         } else {
             relativeY = y;
         }
-        overPane.style.clip = 'rect(' + relativeY + 'px, auto, auto, 0px)';
+        overPane.style.clipPath = 'rect(' + relativeY + 'px, auto, auto, 0px)';
         bar.style.top =  relativeY + 'px';
     };
     // this is necessary since we're using original crops and therefore the
