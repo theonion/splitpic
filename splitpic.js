@@ -1,38 +1,33 @@
 (function (window) {
 
 function SplitPic(element) {
-    var el = $(element);
-    var leftPane = $('.splitpic-left-image', el);
-    var rightPane = $('.splitpic-right-image', el);
-    var bar = $('.splitpic-bar', el);
+    var leftPane = element.querySelector('.splitpic-left-image');
+    var bar = element.querySelector('.splitpic-bar');
     var infoHidden = false;
     // split the image at the cursor
     function updateSplit(x, isRelative) {
         var relativeX;
         if (!isRelative) {
-            var elOffset = el.offset();
-            relativeX = x - elOffset.left;
+            relativeX = x - element.offsetLeft;
         } else {
             relativeX = x;
         }
-        leftPane.css(
-            'clip', 'rect(0px, ' + relativeX + 'px, auto, 0px)'
-        );
-        bar.css('left',  relativeX - bar.width() / 2 + 'px');
+        leftPane.style.clipPath = 'rect(0px, ' + relativeX + 'px, auto, 0px)';
+        bar.style.left = relativeX + 'px';
     };
     // how much of the left image should we show at start? 50% if not specified
-    var startPercentage = parseInt(el.attr('data-start-percent'));
+    var startPercentage = parseInt(element.getAttribute('data-start-percent'));
     if (isNaN(startPercentage)) {
         startPercentage = 50;
     }
     startPercentage /= 100;
-    updateSplit(el.width() * startPercentage, true);
+    updateSplit(element.width * startPercentage, true);
     var isMoving = false;
     var lastX = 0,
         lastY = 0;
-    el.on('touchmove touchstart', function (event) {
+    element.addEventListener('touchmove', function (event) {
         if (!infoHidden) {
-            $('.splitpic-info', el).fadeOut(200);
+            element.querySelector('.splitpic-info').style.opacity = 0;
             infoHidden = true;
         }
         var touches;
@@ -60,65 +55,58 @@ function SplitPic(element) {
             lastY = touch.pageY;
         }
     });
-    el.on('touchend', function (event) {
+    element.addEventListener('touchend', function (event) {
         isMoving = false;
     });
-    el.on('mouseenter mousemove mouseleave', function (event) {
+    element.addEventListener('mousemove', function (event) {
         if (!infoHidden) {
-            $('.splitpic-info', el).fadeOut(200);
+            element.querySelector('.splitpic-info').style.opacity = 0;
             infoHidden = true;
         }
         updateSplit(event.pageX);
     });
-    
+
 };
 
 window.SplitPic = SplitPic;
 
 
 function SplitPicVertical(element) {
-    var el = $(element);
-    var overPane = $('.splitpic-left-image', el);
-    var underPane = $('.splitpic-right-image', el);
-    var bar = $('.splitpic-bar', el);
+    var overPane = element.querySelector('.splitpic-left-image');
+    var bar = element.querySelector('.splitpic-bar');
     var infoHidden = false;
     // split the image at the cursor
     function updateSplit(y, isRelative) {
         var relativeY;
         if (!isRelative) {
-            var elOffset = el.offset();
-            relativeY = y - elOffset.top;
+            relativeY = y - element.offsetTop;
         } else {
             relativeY = y;
         }
-        overPane.css(
-            'clip', 'rect(' + relativeY + 'px, auto, auto, 0px)'
-        );
-        bar.css('top',  relativeY - bar.height() / 2 + 'px');
+        overPane.style.clipPath = 'rect(' + relativeY + 'px, auto, auto, 0px)';
+        bar.style.top =  relativeY + 'px';
     };
     // this is necessary since we're using original crops and therefore the
     // image height won't be known until it's loaded.
     function setInitialPosition() {
         // how much of the left image should we show at start? 50% if not specified
-        var startPercentage = parseInt(el.attr('data-start-percent'));
+        var startPercentage = parseInt(element.getAttribute('data-start-percent'));
         if (isNaN(startPercentage)) {
             startPercentage = 50;
         }
         startPercentage /= 100;
-        updateSplit(el.height() * startPercentage, true);
+        updateSplit(element.clientHeight * startPercentage, true);
     }
-    var img = $('.splitpic-left-image img', element);
-    if (img[0].complete) {
+    var img = element.querySelector('.splitpic-left-image img');
+    img.addEventListener('load',function(){
         setInitialPosition();
-    } else {
-        img.load(setInitialPosition.bind(this));
-    }
+    });
     var isMoving = false;
     var lastX = 0,
         lastY = 0;
-    el.on('touchmove touchstart', function (event) {
+    element.addEventListener('touchmove', function (event) {
         if (!infoHidden) {
-            $('.splitpic-info', el).fadeOut(200);
+            element.querySelector('.splitpic-info').style.opacity = 0;
             infoHidden = true;
         }
         var touches;
@@ -148,17 +136,17 @@ function SplitPicVertical(element) {
             lastY = touch.pageY;
         }
     });
-    el.on('touchend', function (event) {
+    element.addEventListener('touchend', function (event) {
         isMoving = false;
     });
-    el.on('mouseenter mousemove mouseleave', function (event) {
+    element.addEventListener('mousemove', function (event) {
         if (!infoHidden) {
-            $('.splitpic-info', el).fadeOut(200);
+            element.querySelector('.splitpic-info').style.opacity = 0;
             infoHidden = true;
         }
         updateSplit(event.pageY);
     });
-    
+
 };
 
 window.SplitPic = SplitPic;

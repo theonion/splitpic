@@ -61,16 +61,18 @@
         </div>
 
         <script type="text/javascript" src="splitpic.js" ></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script type="text/javascript">
-            $(function () {
-                $('.splitpic-horizontal .splitpic-images').each(function (i, v) {
-                    var sp = new SplitPic(v);
-                });
-                $('.splitpic-vertical .splitpic-images').each(function (i, v) {
-                    var sp = new SplitPicVertical(v);
-                });
-            });
+        NodeList.prototype.forEach = Array.prototype.forEach;
+            (function() {
+                var horizontal = document.querySelectorAll('.splitpic-horizontal .splitpic-images');
+                for (var i = 0; i < horizontal.length; ++i) {
+                    var sp = new SplitPic(horizontal[i]);
+                }
+                var vertical = document.querySelectorAll('.splitpic-vertical .splitpic-images');
+                for (var i = 0; i < vertical.length; ++i) {
+                    var sp = new SplitPicVertical(vertical[i]);
+                }
+            })();
         </script>
     </body>
 </html>
