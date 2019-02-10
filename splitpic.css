@@ -1,6 +1,6 @@
 .splitpic .splitpic-images {
-        position: relative;
-        overflow: hidden;
+    position: relative;
+    overflow: hidden;
 }
 
 .splitpic-image {
@@ -14,8 +14,7 @@
     width: 100%;
     height: 100%;
 }
-.splitpic-right-image {
-}
+
 .splitpic-info {
     top: 45%;
     width: 100%;
@@ -24,6 +23,11 @@
     position: absolute;
     text-align: center;
     background-color: rgba(0, 0, 0, 0.50);
+    -webkit-transition: all .2s ease-out;
+    -moz-transition: all .2s ease-out;
+    -o-transition: all .2s ease-out;
+    -ms-transition: all .2s ease-out;
+    transition: all .2s ease-out;
 }
 .splitpic-bar {
     position: absolute;
