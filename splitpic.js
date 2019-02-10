@@ -21,7 +21,7 @@ function SplitPic(element) {
         startPercentage = 50;
     }
     startPercentage /= 100;
-    updateSplit(element.width * startPercentage, true);
+    updateSplit(element.clientWidth * startPercentage, true);
     var isMoving = false;
     var lastX = 0,
         lastY = 0;
